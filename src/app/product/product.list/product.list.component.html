@@ -1,8 +1,22 @@
 <div class="container">
   <h2>Our Latest Collection</h2>
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="search" />
+  </mat-form-field>
+
+  <mat-form-field class="sort-dropdown">
+    <mat-select
+      (selectionChange)="sortProducts($event.value)"
+      placeholder="sort"
+    >
+      <mat-option value="priceLowHigh"> Price Low To High</mat-option>
+      <mat-option value="priceHighLow"> Price High To Low</mat-option>
+    </mat-select>
+  </mat-form-field>
   <div class="card-list">
-    <div *ngFor="let product of products">
-      <mat-card class="product-card">
+    <div *ngFor="let product of filteredProducts">
+      <mat-card class="product-card" (click)="addToCart(product)">
         <img mat-card-image src="assets/images/{{ product.image_url }}" />
         <mat-card-content>
           <mat-card-title>{{ product.name }}</mat-card-title>
